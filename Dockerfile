@@ -10,6 +10,6 @@ WORKDIR /
 COPY . /
 
 RUN apt-get update
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 ENTRYPOINT ["./startup.sh"]

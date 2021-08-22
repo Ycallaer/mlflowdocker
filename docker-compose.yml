@@ -20,4 +20,4 @@ services:
     expose:
         - "5000"
     environment:
-        - MLWFLOW_BACKEND_STORE_URI="postgresql+pg8000://postgres@mlflowpgdb:54320/mlflowdb"
+        - MLWFLOW_BACKEND_STORE_URI="postgresql+pg8000://postgres@mlflowpgdb:5432/mlflowdb"
