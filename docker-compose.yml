@@ -17,7 +17,9 @@ services:
       dockerfile: Dockerfile
     image: mflowserver
     container_name: mflowserver
+    ports:
+      - "5000:5000"
     expose:
         - "5000"
     environment:
-        - MLWFLOW_BACKEND_STORE_URI="postgresql+pg8000://postgres@mlflowpgdb:5432/mlflowdb"
+        - MLFLOW_BACKEND_STORE_URI="postgresql://postgres:postgres@mlflowpgdb:5432/mlflowdb"

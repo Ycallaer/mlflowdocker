@@ -1,1 +1,3 @@
 CREATE DATABASE mlflowdb;
+GRANT CONNECT ON DATABASE mlflowdb TO postgres;
+GRANT ALL PRIVILEGES ON DATABASE mlflowdb TO postgres;
