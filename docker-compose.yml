@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  postgressdb:
+    image: "postgres:11"
+    container_name: "mlflowpgdb"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - "54320:5432"
+    volumes:
+      - ./db_scripts/cr_db_objects.sql:/docker-entrypoint-initdb.d/db.sql
+
+  mlflow:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mflowserver
+    container_name: mflowserver
+    expose:
+        - "5000"
+    environment:
+        - MLWFLOW_BACKEND_STORE_URI="postgresql+pg8000://postgres@mlflowpgdb:54320/mlflowdb"
