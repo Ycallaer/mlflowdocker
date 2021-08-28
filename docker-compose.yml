@@ -7,8 +7,6 @@ services:
       POSTGRES_HOST_AUTH_METHOD: "trust"
     ports:
       - "54320:5432"
-    volumes:
-      - ./db_scripts/cr_db_objects.sql:/docker-entrypoint-initdb.d/db.sql
 
   mlflow:
     restart: always
@@ -19,7 +17,11 @@ services:
     container_name: mflowserver
     ports:
       - "5000:5000"
+    links:
+      - postgressdb:postgressdb
     expose:
         - "5000"
     environment:
-        - MLFLOW_BACKEND_STORE_URI="postgresql://postgres:postgres@mlflowpgdb:5432/mlflowdb"
+        - MLFLOW_BACKEND_STORE_URI=postgresql://postgres@postgressdb:5432/postgres
+    depends_on:
+      - postgressdb
