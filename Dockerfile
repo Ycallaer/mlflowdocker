@@ -1,7 +1,7 @@
 FROM python:3.7.0-stretch
 ENV MLFLOW_SERVER_HOST 0.0.0.0
-ENV MLFLOW_SERVER_DEFAULT_ARTIFACT_ROOT "wasbs://pocdemo@mflowpoc2.blob.core.windows.net"
-ENV AZURE_STORAGE_ACCESS_KEY ""
+ENV MLFLOW_SERVER_DEFAULT_ARTIFACT_ROOT "./mlruns"
+ENV MLFLOW_BACKEND_STORE_URI ""
 
 # Set the working directory to /
 WORKDIR /
@@ -10,6 +10,6 @@ WORKDIR /
 COPY . /
 
 RUN apt-get update
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 ENTRYPOINT ["./startup.sh"]

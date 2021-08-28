@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  postgressdb:
+    image: "postgres:11"
+    container_name: "mlflowpgdb"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - "54320:5432"
+
+  mlflow:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mflowserver
+    container_name: mflowserver
+    ports:
+      - "5000:5000"
+    links:
+      - postgressdb:postgressdb
+    expose:
+        - "5000"
+    environment:
+        - MLFLOW_BACKEND_STORE_URI=postgresql://postgres@postgressdb:5432/postgres
+    depends_on:
+      - postgressdb
