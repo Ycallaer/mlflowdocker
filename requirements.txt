@@ -1,4 +1,4 @@
-mlflow==1.23.1
+mlflow==2.12.1
 psycopg2==2.8.4
 pg8000==1.21.0
 azure-storage==0.36.0
